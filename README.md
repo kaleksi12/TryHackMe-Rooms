@@ -1,3 +1,3 @@
-# TryHackMe-Portfolio
-Repository of achievements gained on TryHackMe
+# TryHackMe-Writeups
+Repository of room writeups on TryHackMe
 
