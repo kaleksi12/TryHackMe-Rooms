@@ -185,4 +185,6 @@ This scheduled task runs daily at 09:00. It establishes a fileless persistence m
 
 ### 9. Lessons Learned and Remediation
 
-<span style="color:Red;">Todo: make this section </span>
+```diff
+- Todo: make this section
+```
