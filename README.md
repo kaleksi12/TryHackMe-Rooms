@@ -1,2 +1,2 @@
 # TryHackMe-Rooms
-Repository of some completed room on TryHackMe
+Repository of some completed rooms on TryHackMe
