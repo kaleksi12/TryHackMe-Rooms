@@ -4,7 +4,7 @@ Welcome to my cybersecurity portfolio! I am a cybersecurity student focusing hea
 
 ## Repository Structure
 
-* **`/blue-team`**: Detailed writeups focusing on log analysis, incident response, SIEM navigation (e.g., Splunk, Elastic), and network traffic analysis.
+* **`/Blue-team`**: Detailed writeups focusing on log analysis, incident response, SIEM navigation (e.g., Splunk, Elastic), and network traffic analysis.
 * **`/AI-security`**: Explorations and writeups regarding AI vulnerabilities, prompt injection, and securing machine learning environments.
 
 ## Foundational Knowledge & Learning Paths
