@@ -1,2 +1,3 @@
-# TryHackMe-Rooms
-Repository of some completed rooms on TryHackMe
+# TryHackMe-Portfolio
+Repository of achievements gained on TryHackMe
+
