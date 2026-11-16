@@ -15,6 +15,6 @@ In addition to the specific room writeups in the folders above, I have completed
 * SOC Level 1
 * Cyber Security 101
 
-I have also completed some events: 
+I have also completed some events held by TryHackMe: 
 * loveatfirstbreach 
 * Advent of cyber 2025 
