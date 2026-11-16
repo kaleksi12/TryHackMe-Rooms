@@ -4,7 +4,7 @@
 **Focus Area:** Incident Response, Memory Forensics, Phishing Analysis
  
 ## Objective 
-In this challenge, Quick Logistics LLC has experienced a follow-up cyberattack by an attacker known as the Boogeyman. In this scenario Maxine, a HR specialist, received a spear-phishing email in the form of an application for one of the open positions in the company. This email contained a malicious attachment. The objective in this challenge is to analyze the provided artifact and workstation memory dump using tools like Volatility and Olevba to trace the malware's execution flow, identify the established Command and Control (C2) infrastructure, and uncover the attacker's persistence mechanisms. 
+In this challenge, Quick Logistics LLC has experienced a follow-up cyberattack by an attacker known as the Boogeyman. In this scenario Maxine, a HR specialist, received a spear-phishing email in the form of an application for one of the open positions in the company. This email contained a malicious attachment. The objective of this challenge is to analyze the provided artifact and workstation memory dump using tools like Volatility and Olevba to trace the malware's execution flow, identify the established Command and Control (C2) infrastructure, and uncover the attacker's persistence mechanisms. 
  
 ## Investigation Steps 
  
@@ -185,6 +185,27 @@ This scheduled task runs daily at 09:00. It establishes a fileless persistence m
 
 ### 9. Lessons Learned and Remediation
 
-```diff
-- Todo: make this section
-```
+**Phishing Vulnerability**:
+Even today, phishing is one of the most common entry points into target networks (read ENISA Threat Landscape 2026 report). Detecting these attacks, especially spear-phishing, can be extremely difficult.   
+
+**Macro Exploitation**:
+The initial payload executed through macros enabled in Microsoft Office. Considering this, there is a lack of macro security policies. 
+
+**Living off the Land (LotL) Techniques**:
+The attacker was successful in evading basic detection, since they utilised native Windows binaries (such as wscript.exe, schtasks.exe, and powershell.exe). They were able to use genuine system utilities to execute their payloads and establish persistence mechanisms.
+
+**Fileless Malware & Registry Abuse**:
+The persistence mechanism the attacker was able to employ was highly evasive. It stored the malicious payload directly in the Windows Registry, not on the disk, and the payload was executed purely in memory through hidden PowerShell commands.
+
+**Outbound Traffic**:
+The environment presented in this challenge allowed outbound connections to suspicious domains (.lol) and non-standard HTTP ports (8080 for the C2 connection). This indicates that there are potential gaps in egress filtering.     
+### 9.1. Immediate Response 
+1. Isolate the Infected Host: Ensure that the infected host is disconnected from the corporate network to prevent the possibility of lateral movement or further C2 communication. 
+2. Preserve and Eradicate: Before removing any artifacts, safely preserve them for the forensic team. Export the scheduled task ("Updater") and malicious registry key ("HKCU:\Software\Microsoft\Windows\CurrentVersion debug"), and secure the identified payloads and original attachment in a quarantine archive. Once evidence is preserved, eradicate the threat completely by wiping the infected machine and reimaging it from a known-good corporate baseline.
+3. Block Malicious Network traffic: Blacklist the C2 IP address, and block all of the traffic to the payload staging domain ("file.boogeymanisback.lol").
+
+### 9.2. Security Improvements 
+1. Enhance Email Security: One of the best ways to phishing attacks is through education. Personnel should be educated on what phishing today looks like, and what should be done when suspecting malicious activity. Previous instructions (like bad grammar) aren't always valid today, since Artificial Intelligence has drastically improved the phishing emails sent.
+2. Macro Settings: Macros should be disabled, especially from files downloaded from external sources.
+3. Application Control: Restrict the execution of scripts (like .js files via Windows Script Host) and unauthorised executables running from common staging directories like "C:\ProgramData" and "C:\Windows\Tasks"
+4. Powershell Logging: Enable PowerShell Script Block Logging (Event ID 4104) to capture deobfuscated contents of the fileless payloads running in memory. 
