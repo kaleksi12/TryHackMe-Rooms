@@ -1,1 +1,1 @@
-This folder contains writeups blue-teaming themed challenges on TryHackMe
+This folder contains writeups of blue-teaming themed challenges on TryHackMe
